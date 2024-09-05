@@ -25,6 +25,7 @@
         healthBar.id = "healthBar" + charId;
         healthBarParent.append(healthBar);
         document.getElementById('health-bars').append(nameLabel,healthBarParent);
+        updateHealth(charId);
     }
     function addCharacters(){
         let healthBarDiv = document.getElementById('health-bars');
