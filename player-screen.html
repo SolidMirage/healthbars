@@ -33,9 +33,6 @@
         for(const [key,value] of Object.entries(characters)){
             playerAddCharacter(key);
         }
-        // for(let i = 0; i < numCharacters; i++){
-        //     playerAddCharacter(i);
-        // }
     }
     function updateHealth(charId){
         document.getElementById('healthBar'+charId).style.width=""+characters[charId].health+"%";
@@ -46,18 +43,11 @@
             numCharacters = localStorage['numCharacters'];
             addCharacters();
         }
-        for(const [key,value] of Object.entries(characters)){
-            if(value.health != localStorage[key+'health']){
-                value.health = localStorage[key+'health'];
-                updateHealth(key);
-                console.log('char'+key+' health updated to: ' +characters[key].health);
-            }
-        }
-        // for(let i = 0; i < numCharacters; i++){
-        //     if(characters['char'+i].health != localStorage['char'+i+'health']){
-        //         characters['char'+i].health = localStorage['char'+i+'health'];
-        //         updateHealth(i);
-        //         console.log('char'+i+' health updated to: ' +characters['char'+i].health);
+        // for(const [key,value] of Object.entries(characters)){
+        //     if(value.health != localStorage[key+'health']){
+        //         value.health = localStorage[key+'health'];
+        //         updateHealth(key);
+        //         console.log('char'+key+' health updated to: ' +characters[key].health);
         //     }
         // }
     }, 100);
