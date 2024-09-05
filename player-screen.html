@@ -14,7 +14,7 @@
     let characters=[];
     let numCharacters = 0;
     function playerAddCharacter(charId){
-        console.log(charId);
+        //console.log(charId);
         let nameLabel = document.createElement("h3");
         nameLabel.innerText = characters[charId].name;
         let healthBarParent = document.createElement("div");
@@ -44,10 +44,12 @@
             addCharacters();
         }
         for(const [key,value] of Object.entries(characters)){
+            ////console.log('check key: ' + key + ',value: ' + value.health);
             if(value.health != localStorage[key+'health']){
                 value.health = localStorage[key+'health'];
                 updateHealth(key);
-                console.log('char'+key+' health updated to: ' +characters[key].health);
+                //console.log(characters);
+                //console.log('char'+key+' health updated to: ' +characters[key].health);
             }
         }
     }, 100);
