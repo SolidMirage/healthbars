@@ -42,6 +42,7 @@ function deleteCharacter(){
     numCharacters--;
     localStorage.setItem('listOfCharacters', JSON.stringify(characters));
     localStorage.setItem('numCharacters', numCharacters);
+    localStorage.removeItem(charToDelete+'health');
     var selectobject = document.getElementById("deleteList");
     for (var i=0; i<selectobject.length; i++) {
         if (selectobject.options[i].value == charToDelete)
@@ -106,6 +107,7 @@ function addCharacter(){
 
     numCharacters++;
     numId++;
+    changeHealth(currHealthNum);
     localStorage.setItem('listOfCharacters', JSON.stringify(characters));
     localStorage.setItem('numCharacters', numCharacters);
     console.log(characters);
