@@ -1,0 +1,16 @@
+#character-list{
+    font-size: 32px;
+}
+
+.health-bar-parent{
+    width: 80%;
+    border:1px solid black;
+}
+.health-bar{
+    height:30px;
+    background-color: red;
+}
+
+input{
+    font-size: 32px;
+}
