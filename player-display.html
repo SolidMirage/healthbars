@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" href="style.css"> 
+</head>
+<h1>Players</h1>
+<div id="health-bars">
+
+</div>
+<!-- <div style="width:80%"><div id="solari-health-bar" style="height:30px;background-color: red;"></div></div> -->
+</body>
+<script>
+    let characters=[];
+    let numCharacters = 0;
+    function playerAddCharacter(charId){
+        console.log(charId);
+        let nameLabel = document.createElement("h3");
+        nameLabel.innerText = characters[charId].name;
+        let healthBarParent = document.createElement("div");
+        healthBarParent.className = "health-bar-parent";
+        healthBarParent.id = "healthBarParent" + charId;
+        let healthBar = document.createElement("div");
+        healthBar.className = "health-bar";
+        healthBar.id = "healthBar" + charId;
+        healthBarParent.append(healthBar);
+        document.getElementById('health-bars').append(nameLabel,healthBarParent);
+    }
+    function addCharacters(){
+        let healthBarDiv = document.getElementById('health-bars');
+        healthBarDiv.textContent = '';
+        for(const [key,value] of Object.entries(characters)){
+            playerAddCharacter(key);
+        }
+        // for(let i = 0; i < numCharacters; i++){
+        //     playerAddCharacter(i);
+        // }
+    }
+    function updateHealth(charId){
+        document.getElementById('healthBar'+charId).style.width=""+characters[charId].health+"%";
+    }
+    setInterval(function () {
+        if (numCharacters !== (localStorage['numCharacters'])) {
+            characters = JSON.parse(localStorage['listOfCharacters']);            
+            numCharacters = localStorage['numCharacters'];
+            addCharacters();
+        }
+        for(const [key,value] of Object.entries(characters)){
+            if(value.health != localStorage[key+'health']){
+                value.health = localStorage[key+'health'];
+                updateHealth(key);
+                console.log('char'+key+' health updated to: ' +characters[key].health);
+            }
+        }
+        // for(let i = 0; i < numCharacters; i++){
+        //     if(characters['char'+i].health != localStorage['char'+i+'health']){
+        //         characters['char'+i].health = localStorage['char'+i+'health'];
+        //         updateHealth(i);
+        //         console.log('char'+i+' health updated to: ' +characters['char'+i].health);
+        //     }
+        // }
+    }, 100);
+</script>
+</html>
