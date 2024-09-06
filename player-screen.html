@@ -16,29 +16,41 @@
     let numCharacters = 0;
     function playerAddCharacter(charId){
         let nameLabel = document.createElement("h3");
+        nameLabel.className = 'character-name';
         nameLabel.innerText = characters[charId].name;
+
+        let conditionText = document.createElement("div");
+        conditionText.className = 'status-condition';
+        conditionText.id = 'conditionText' + charId;
+        conditionText.innerText = characters[charId].condition;
+
         let healthBarGroup = document.createElement("div");
         healthBarGroup.className = "health-bar-group";
         healthBarGroup.id = "healthBarGroup" + charId;
+
         let healthBarParent = document.createElement("div");
         healthBarParent.className = "health-bar-parent";
         healthBarParent.id = "healthBarParent" + charId;
+
         let healthBar = document.createElement("div");
         healthBar.className = "health-bar";
         healthBar.id = "healthBar" + charId;
+
         let healthCurrNum = document.createElement("div");
         healthCurrNum.className = "player-curr-health-num";
         healthCurrNum.id = "healthCurrNum" + charId;
         healthCurrNum.innerText = characters[charId].currHealth;
         healthBar.append(healthCurrNum);
         healthBarParent.append(healthBar);
+
         let healthMaxNum = document.createElement("div");
         healthMaxNum.className = "player-max-health-num";
         healthMaxNum.id = "healthMaxNum" + charId;
         healthMaxNum.innerText = characters[charId].maxHealth;
         healthBarGroup.append(healthBarParent, healthMaxNum);
-        document.getElementById('health-bars').append(nameLabel,healthBarGroup);
+        document.getElementById('health-bars').append(nameLabel,conditionText,healthBarGroup);
         updateHealth(charId);
+        updateCondition(charId,characters[charId].condition);
     }
     function addCharacters(){
         let healthBarDiv = document.getElementById('health-bars');
@@ -55,6 +67,16 @@
         document.getElementById('healthCurrNum'+charId).innerText = currHealth;
         document.getElementById('healthMaxNum'+charId).innerText = maxHealth;
     }
+    function updateCondition(charId, condition){
+        let conditionText = document.getElementById('conditionText' + charId);
+        conditionText.innerText = condition;
+        if(condition == ''){
+            conditionText.style.display = 'none';
+        }
+        else{
+            conditionText.style.display = 'inline-block';
+        }
+    }
     setInterval(function () {
         if (numCharacters !== (localStorage['numCharacters'])) {
             characters = JSON.parse(localStorage['listOfCharacters']);            
@@ -69,6 +91,10 @@
             if(value.maxHealth != localStorage[key+'maxHealth']){
                 value.maxHealth = localStorage[key+'maxHealth'];
                 updateHealth(key);
+            }
+            if(value.condition != localStorage[key+'condition']){
+                value.condition = localStorage[key+'condition'];
+                updateCondition(key, value.condition);
             }
         }
     }, 100);

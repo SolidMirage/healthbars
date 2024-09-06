@@ -2,6 +2,22 @@
     font-size: 32px;
 }
 
+.character-name{
+    display:inline-block;
+}
+  
+.status-condition{
+    display:none;
+    margin-left: 10px;
+    background-color:orange;
+    padding: 5px 10px 5px 10px;
+    border-radius: 14px;
+}
+
+.health-bar-group{
+    position: relative;
+    overflow: auto;
+    height: 35px;
 }
 
 .health-bar-parent{
@@ -44,4 +60,16 @@
 .max-health-input{
     font-size: 32px;
 }
+
+.condition-label{
+    font-size:16px;
+    display:inline-block;
+    width:fit-content;
+    /* float:left;  */
+}
+
+.condition-text{
+    font-size: 16px;
+    display:inline-block;
+    width:80%;
 }
