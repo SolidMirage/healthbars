@@ -4,6 +4,7 @@
 <title>Player Screen</title>
 <link rel="stylesheet" href="style.css"> 
 </head>
+<body>
 <h1>Players</h1>
 <div id="health-bars">
 
@@ -14,17 +15,29 @@
     let characters=[];
     let numCharacters = 0;
     function playerAddCharacter(charId){
-        //console.log(charId);
         let nameLabel = document.createElement("h3");
         nameLabel.innerText = characters[charId].name;
+        let healthBarGroup = document.createElement("div");
+        healthBarGroup.className = "health-bar-group";
+        healthBarGroup.id = "healthBarGroup" + charId;
         let healthBarParent = document.createElement("div");
         healthBarParent.className = "health-bar-parent";
         healthBarParent.id = "healthBarParent" + charId;
         let healthBar = document.createElement("div");
         healthBar.className = "health-bar";
         healthBar.id = "healthBar" + charId;
+        let healthCurrNum = document.createElement("div");
+        healthCurrNum.className = "player-curr-health-num";
+        healthCurrNum.id = "healthCurrNum" + charId;
+        healthCurrNum.innerText = characters[charId].currHealth;
+        healthBar.append(healthCurrNum);
         healthBarParent.append(healthBar);
-        document.getElementById('health-bars').append(nameLabel,healthBarParent);
+        let healthMaxNum = document.createElement("div");
+        healthMaxNum.className = "player-max-health-num";
+        healthMaxNum.id = "healthMaxNum" + charId;
+        healthMaxNum.innerText = characters[charId].maxHealth;
+        healthBarGroup.append(healthBarParent, healthMaxNum);
+        document.getElementById('health-bars').append(nameLabel,healthBarGroup);
         updateHealth(charId);
     }
     function addCharacters(){
@@ -35,7 +48,12 @@
         }
     }
     function updateHealth(charId){
-        document.getElementById('healthBar'+charId).style.width=""+characters[charId].health+"%";
+        let currHealth = characters[charId].currHealth;
+        let maxHealth = characters[charId].maxHealth;
+        let healthRatio = (currHealth/maxHealth)*100;
+        document.getElementById('healthBar'+charId).style.width=""+healthRatio+"%";
+        document.getElementById('healthCurrNum'+charId).innerText = currHealth;
+        document.getElementById('healthMaxNum'+charId).innerText = maxHealth;
     }
     setInterval(function () {
         if (numCharacters !== (localStorage['numCharacters'])) {
@@ -44,12 +62,13 @@
             addCharacters();
         }
         for(const [key,value] of Object.entries(characters)){
-            ////console.log('check key: ' + key + ',value: ' + value.health);
-            if(value.health != localStorage[key+'health']){
-                value.health = localStorage[key+'health'];
+            if(value.currHealth != localStorage[key+'currHealth']){
+                value.currHealth = localStorage[key+'currHealth'];
                 updateHealth(key);
-                //console.log(characters);
-                //console.log('char'+key+' health updated to: ' +characters[key].health);
+            }
+            if(value.maxHealth != localStorage[key+'maxHealth']){
+                value.maxHealth = localStorage[key+'maxHealth'];
+                updateHealth(key);
             }
         }
     }, 100);

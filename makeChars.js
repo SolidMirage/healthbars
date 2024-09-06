@@ -15,9 +15,12 @@ function changeHealth(ele){
     let healthRatio = (currHealth/maxHealth)*100;
     //console.log(currChar.id);
     //console.log(characters[currChar.id]);
-    characters[currChar.id].health = healthRatio;
+    characters[currChar.id].maxHealth = maxHealth;
+    characters[currChar.id].currHealth = currHealth;
+    // characters[currChar.id].health = healthRatio;
     // localStorage.setItem('health'+currChar.id,healthRatio);
-    localStorage.setItem(currChar.id+'health', healthRatio);
+    localStorage.setItem(currChar.id+'currHealth', currHealth);
+    localStorage.setItem(currChar.id+'maxHealth', maxHealth);
     document.getElementById('healthBar'+currChar.id).style.width=""+(healthRatio)+"%";
     // //console.log(ele.id);
     // let solariMaxHealth = document.getElementById('max-health').value;
@@ -30,10 +33,6 @@ function changeHealth(ele){
 }
 
 let charDiv = document.getElementById('character-list');
-
-function onSelectChange(){
-    //console.log(document.getElementById('deleteList').value);
-}
 
 function deleteCharacter(){
     let charToDelete = document.getElementById('deleteList').value;
@@ -61,7 +60,7 @@ function addCharacter(){
     currHealthLabel.innerText = newName + " Current Health";
     currHealthLabel.id="currHealthLabel"+numId;
     let currHealthNum = document.createElement("input");
-    
+    currHealthNum.className = "curr-health-input";
     currHealthNum.id="currHealthNum"+"char" +numId;
     currHealthNum.type="number";
     currHealthNum.value=50;
@@ -70,10 +69,15 @@ function addCharacter(){
     maxHealthLabel.innerText = newName + " Max Health";
     maxHealthLabel.id="maxHealthLabel"+numId;
     let maxHealthNum = document.createElement("input");
+    maxHealthNum.className = "max-health-input";
     maxHealthNum.id="maxHealthNum"+"char" +numId;
     maxHealthNum.type="number";
     maxHealthNum.value=50;
     maxHealthNum.min=0;
+
+    let healthBarGroup = document.createElement("div");
+    healthBarGroup.className = "health-bar-group";
+    healthBarGroup.id = "healthBarGroup" + "char"+ numId;
     let healthBarParent = document.createElement("div");
     healthBarParent.className = "health-bar-parent";
     healthBarParent.id = "healthBarParent" + "char" + numId;
@@ -81,6 +85,7 @@ function addCharacter(){
     healthBar.className = "health-bar";
     healthBar.id = "healthBar" + "char" + numId;
     healthBarParent.append(healthBar);
+    healthBarGroup.append(healthBarParent);
     let breakElement = document.createElement("br");
     currChar.append(currHealthLabel);
     currChar.append(breakElement.cloneNode(true));
@@ -90,8 +95,8 @@ function addCharacter(){
     currChar.append(breakElement.cloneNode(true));
     currChar.append(maxHealthNum);
     currChar.append(breakElement.cloneNode(true));
-    currChar.append(healthBarParent);
-    currChar.append(breakElement.cloneNode(true));
+    currChar.append(healthBarGroup);
+    // currChar.append(breakElement.cloneNode(true));
     currHealthNum.setAttribute("onchange","changeHealth(this)");
     maxHealthNum.setAttribute("onchange","changeHealth(this)");
     
@@ -99,7 +104,8 @@ function addCharacter(){
     
     let charJSON = {
         name: newName,
-        health: 100
+        currHealth: 50,
+        maxHealth: 50,
     }
     characters['char'+numId]=charJSON;
     let deleteList = document.getElementById('deleteList');

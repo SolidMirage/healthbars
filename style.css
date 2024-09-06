@@ -2,15 +2,46 @@
     font-size: 32px;
 }
 
+}
+
 .health-bar-parent{
     width: 80%;
     border:1px solid black;
+    float: left;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 .health-bar{
     height:30px;
     background-color: red;
 }
 
-input{
+.player-max-health-num{
+    margin: 0px 0px 0px 10px;
+    display: inline;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.player-curr-health-num{
+    margin-right: 10px;
+    float: right;
+    width: 40px;
+    text-align: right;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.curr-health-input{
     font-size: 32px;
+}
+
+.max-health-input{
+    font-size: 32px;
+}
 }
