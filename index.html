@@ -21,14 +21,19 @@
     <button onclick="addCharacter()">+</button><br><br><br><br><br><br>
     <select onchange='onSelectChange()' id="deleteList">
     </select>
-    <button onClick="deleteCharacter()">Delete Character</button>
+    <button onClick="deleteCharacter()">Delete Character</button><br><br><br><br><br><br>
+    <div style="width:40%">
+        <h2>Instructions</h2>
+        <p>You can add characters by typing in their name and clicking the '+' Button.</p>
+        <p>You'll be able to adjust their Current Health, Max Health, and add custom status conditions or notes.</p>
+        <p>After typing what you want to update, press 'enter', 'tab', or click away from the box for it to update.</p>
+        <p>You can remove a character by going to the 'Delete Character' section, selecting the character from the dropdown 
+            and clicking the 'Delete Character' button.</p>
+        <p>When you adjust anything on the DM screen, you should see an appropriate change on the <a target="_blank" href="./player-screen.html">Player Screen Page</a></a>.</p>
+        <p>The character information is shared per browser and will go away on refresh.</p>
+    </div>
+    
     
 </body>
 <script type="text/javascript" src="makeChars.js"></script>
 </html>
-
-<!-- <label>Solari Current Health</label><br>
-<input onchange="myFunction(this)" type="number" id="curr-health" value="50" min="0"><br>
-<label>Solari Max Health</label><br>
-<input onchange="myFunction(this)" type="number" id="max-health" value="50" min="0"><br>
-<div style="width:80%"><div id="solari-health-bar" style="height:30px;background-color: red;"></div></div> -->
