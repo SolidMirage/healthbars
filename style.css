@@ -17,10 +17,14 @@
 .health-bar-group{
     position: relative;
     overflow: auto;
-    height: 35px;
+    height: 42px;
+    font-size:30px;
+    font-style:bold;
+    width: 80%;
 }
 
 .health-bar-parent{
+    height:40px;
     width: 80%;
     border:1px solid black;
     float: left;
@@ -30,17 +34,18 @@
     transform: translateY(-50%);
 }
 .health-bar{
-    height:30px;
+    height:40px;
     background-color: red;
 }
 
 .player-max-health-num{
-    margin: 0px 0px 0px 10px;
+    margin: 0px 0px 0px 20px;
     display: inline;
     position: absolute;
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    font-size: 30px;
 }
 
 .player-curr-health-num{
@@ -51,6 +56,7 @@
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    color:cornsilk;
 }
 
 .curr-health-input{
